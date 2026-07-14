@@ -1,0 +1,21 @@
+
+---
+title: "Lebron [Surname]"
+image: profile.jpg
+about:
+  template: trestles
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/YOURUSERNAME
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/YOURPROFILE
+---
+
+Hi, I'm Lebron — a mathematics and statistics student at Trinity College Dublin.
+
+I build statistical models around sport: most recently a Bradley-Terry model
+predicting ATP tennis match outcomes, developed during a research internship at TCD.
+
+Off the laptop you'll find me on a GAA pitch, a soccer pitch, or in the gym.

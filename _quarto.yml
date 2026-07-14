@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "Enda Byard Shaughnessy"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: projects.qmd
+        text: Projects
+      - href: others.qmd
+        text: Sonion folk respect moments
+      - href: cv_quart.qmd
+        text: CV
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+
