@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "interactive_plots_BT.html",
+    "href": "interactive_plots_BT.html",
+    "title": "Under Maintenance…",
+    "section": "",
+    "text": "This is essentially says how much does a players’ performance vary, how consistent of a performer are they?"
+  },
+  {
+    "objectID": "interactive_plots_BT.html#standard-error-of-averaged-player-estimates",
+    "href": "interactive_plots_BT.html#standard-error-of-averaged-player-estimates",
+    "title": "Under Maintenance…",
+    "section": "",
+    "text": "This is essentially says how much does a players’ performance vary, how consistent of a performer are they?"
+  },
+  {
+    "objectID": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
+    "href": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
+    "title": "Under Maintenance…",
+    "section": "Optimisation Curve Illustrating flatness around minimum",
+    "text": "Optimisation Curve Illustrating flatness around minimum\nThe reason for not choosing the absolute minimum but taking a point nearby is explained in more depth in section 3.3 of the full report. The plot here shows that the curve is flat around the minimum which means if we change our choice of hyperparameters the log loss we are trying to minimise does not change in a significant way."
+  },
+  {
     "objectID": "cv_quart.html",
     "href": "cv_quart.html",
     "title": "Gerrup Cabra",
