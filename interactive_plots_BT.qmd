@@ -1,0 +1,26 @@
+---
+title: "Under Maintenance..."
+---
+## Standard Error of averaged player estimates
+
+This is essentially says how much does a players' performance vary, how consistent of a performer are they?
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(plotly)
+library(ggplot2)
+readRDS("se_plot.rds")
+```
+
+## Optimisation Curve Illustrating flatness around minimum
+
+The reason for not choosing the absolute minimum but taking a point nearby is explained in
+more depth in section 3.3 of the full report. The plot here shows that the curve is flat around the minimum which means if we change our choice of hyperparameters the log loss we are trying to minimise does not change in a significant way.
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(plotly)
+readRDS("bt_surface.rds")
+```

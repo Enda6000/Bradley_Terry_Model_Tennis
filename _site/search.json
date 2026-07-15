@@ -1,10 +1,38 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Lebron [Surname]",
+    "objectID": "interactive_plots_BT.html",
+    "href": "interactive_plots_BT.html",
+    "title": "Under Maintenance…",
     "section": "",
-    "text": "Hi, I’m Lebron — a mathematics and statistics student at Trinity College Dublin.\nI build statistical models around sport: most recently a Bradley-Terry model predicting ATP tennis match outcomes, developed during a research internship at TCD.\nOff the laptop you’ll find me on a GAA pitch, a soccer pitch, or in the gym."
+    "text": "This is essentially says how much does a players’ performance vary, how consistent of a performer are they?"
+  },
+  {
+    "objectID": "interactive_plots_BT.html#standard-error-of-averaged-player-estimates",
+    "href": "interactive_plots_BT.html#standard-error-of-averaged-player-estimates",
+    "title": "Under Maintenance…",
+    "section": "",
+    "text": "This is essentially says how much does a players’ performance vary, how consistent of a performer are they?"
+  },
+  {
+    "objectID": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
+    "href": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
+    "title": "Under Maintenance…",
+    "section": "Optimisation Curve Illustrating flatness around minimum",
+    "text": "Optimisation Curve Illustrating flatness around minimum\nThe reason for not choosing the absolute minimum but taking a point nearby is explained in more depth in section 3.3 of the full report. The plot here shows that the curve is flat around the minimum which means if we change our choice of hyperparameters the log loss we are trying to minimise does not change in a significant way."
+  },
+  {
+    "objectID": "cv_quart.html",
+    "href": "cv_quart.html",
+    "title": "Gerrup Cabra",
+    "section": "",
+    "text": "Figure 1: Rank stability across folds"
+  },
+  {
+    "objectID": "anims.html",
+    "href": "anims.html",
+    "title": "Gerrup Cabra",
+    "section": "",
+    "text": "Figure 1: Rank stability across folds"
   },
   {
     "objectID": "about.html",
@@ -12,5 +40,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Predicting ATP Tennis Matches",
+    "section": "Results",
+    "text": "Results\nThe tuned model reached roughly 64.5% out-of-sample accuracy on unseen matches. More detail on the methodology, the estimation approach, and the evaluation is on the Model page."
   }
 ]

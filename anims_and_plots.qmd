@@ -1,0 +1,5 @@
+---
+title: "Animations and Plots"
+---
+![Density of the probability that the actual winner won](fold_probs.gif){#fig-bump width=70%}
+![Averaged ability versus per fold estimate](fold_settle.gif){#fig-bump width=70%}
