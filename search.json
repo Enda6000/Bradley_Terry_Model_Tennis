@@ -1,10 +1,17 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Lebron [Surname]",
+    "objectID": "cv_quart.html",
+    "href": "cv_quart.html",
+    "title": "Gerrup Cabra",
     "section": "",
-    "text": "Hi, I’m Lebron — a mathematics and statistics student at Trinity College Dublin."
+    "text": "Figure 1: Rank stability across folds"
+  },
+  {
+    "objectID": "anims.html",
+    "href": "anims.html",
+    "title": "Gerrup Cabra",
+    "section": "",
+    "text": "Figure 1: Rank stability across folds"
   },
   {
     "objectID": "about.html",
@@ -12,5 +19,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#results",
+    "href": "index.html#results",
+    "title": "Predicting ATP Tennis Matches",
+    "section": "Results",
+    "text": "Results\nThe tuned model reached roughly 64.5% out-of-sample accuracy on unseen matches. More detail on the methodology, the estimation approach, and the evaluation is on the Model page."
   }
 ]
