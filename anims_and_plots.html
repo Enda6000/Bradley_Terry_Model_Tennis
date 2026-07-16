@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -110,6 +139,11 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/enda-byard-shaughnessy"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -121,11 +155,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#density-of-the-probability-that-the-actual-winner-won" id="toc-density-of-the-probability-that-the-actual-winner-won" class="nav-link active" data-scroll-target="#density-of-the-probability-that-the-actual-winner-won">Density of the probability that the actual winner won</a></li>
+  <li><a href="#centipede-plot-for-player-abilities-averaging-over-fold-estimates" id="toc-centipede-plot-for-player-abilities-averaging-over-fold-estimates" class="nav-link" data-scroll-target="#centipede-plot-for-player-abilities-averaging-over-fold-estimates">Centipede plot for player abilities &amp; averaging over fold estimates</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -146,9 +187,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="fold_probs.gif" id="fig-bump" class="img-fluid" style="width:70.0%" alt="Density of the probability that the actual winner won"> <img src="fold_settle.gif" id="fig-bump" class="img-fluid" style="width:70.0%" alt="Averaged ability versus per fold estimate"></p>
+<section id="density-of-the-probability-that-the-actual-winner-won" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="density-of-the-probability-that-the-actual-winner-won">Density of the probability that the actual winner won</h2>
+<div class="quarto-layout-panel page-columns page-full" data-layout="[60,40]">
+<div class="quarto-layout-row quarto-layout-valign-center page-full">
+<div class="quarto-layout-cell page-columns page-full" style="flex-basis: 60.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="fold_probs.gif" class="img-fluid figure-img column-page" style="width:100.0%"></p>
+<figcaption>Density of the probability that the actual winner won</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>When we pick a training and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. We can see the plot is most active around the 45%-70% range which is what we would hope for.</p>
+<p><br><br></p>
+<ul>
+<li><span class="math inline">\(p_{ij}\)</span> — probability that player <span class="math inline">\(i\)</span> beats player <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\beta_i\)</span> — ability/strength score of player <span class="math inline">\(i\)</span>, estimated by the model <span class="math display">\[
+p_{ij} = \frac{e^{\beta_i}}{e^{\beta_i} + e^{\beta_j}}
+\]</span></li>
+</ul>
+<p><span class="math display">\[
+P(\text{actual winner won}) =
+\begin{cases}
+p_{ij} &amp; \text{if player } i \text{ won} \\
+1 - p_{ij} &amp; \text{if player } j \text{ won}
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="centipede-plot-for-player-abilities-averaging-over-fold-estimates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="centipede-plot-for-player-abilities-averaging-over-fold-estimates">Centipede plot for player abilities &amp; averaging over fold estimates</h2>
+<div class="column-page quarto-layout-panel" data-layout="[60,40]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="cent_plot_2.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>The centipede plot shows the estimated abilities for all 584 players with 95% intervals from the Laplace approximation.</p>
+</div>
+</div>
+</div>
+<p><br><br></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -224,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/portfolio1\/");
+        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/Bradley_Terry_Model_Tennis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -558,7 +644,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Enda Byard Shaughnessy &amp; James Brennan</p>
+<p>Hamilton Trust Research Internship 2026, Trinity College Dublin</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
