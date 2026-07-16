@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>Predicting Tennis Match Outcomes Using The Bradley-Terry Model</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,29 +123,59 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-bradley-terry-model-with-regularised-map-estimation" id="toc-a-bradley-terry-model-with-regularised-map-estimation" class="nav-link active" data-scroll-target="#a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</a></li>
+  <li><a href="#what-is-a-bradley-terry-model" id="toc-what-is-a-bradley-terry-model" class="nav-link" data-scroll-target="#what-is-a-bradley-terry-model">What is a Bradley-Terry Model?</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Predicting Tennis Match Outcomes Using The Bradley-Terry Model</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="predicting-atp-tennis-matches" class="level1 hero">
-<h1>Predicting ATP Tennis Matches</h1>
-<section id="a-bradley-terry-model-with-regularised-map-estimation" class="level3">
-<h3 class="anchored" data-anchor-id="a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</h3>
-</section>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="a-bradley-terry-model-with-regularised-map-estimation" class="level2 hero">
+<h2 class="anchored" data-anchor-id="a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</h2>
 </section>
 <div class="lead">
-<p>Can we predict who wins a professional tennis match better than the rankings can? This project builds a Bradley-Terry model on ATP match data, fitting player strengths by maximum a posteriori estimation and tuning the priors by cross-validated 2D grid search.</p>
+<p>Can we predict the winner of a professional tennis match better than the official rankings? This project builds a Bradley-Terry model on ATP match data from the 2024 &amp; 2025 seasons, fitting player strengths by Maximum A Posteriori estimation and tuning the prior’s regularisation parameters via a cross-validated 2D grid search.</p>
+<p>Many thanks to Dr Jason Wyse for his guidance throughout the project, and to Prof Nikhil Savale for organising the research internship.</p>
 </div>
 <p><img src="mixed_players_image.jpg" class="img-fluid"></p>
+<section id="what-is-a-bradley-terry-model" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-bradley-terry-model">What is a Bradley-Terry Model?</h2>
+<p>The Bradley-Terry model is a way of turning head-to-head results comprised of either a win or a loss into a single strength score for each competitor. Every player has some underlying ability, and when two players meet, the probability of each winning depends on the gap between their abilities. A big gap means the stronger player almost always wins; a tiny gap means the match is close to a coin flip.</p>
+<p>The model works backwards from head-to-head results to abilities/strength scores. Beating a strong opponent nudges your score up more than beating a weak one, and losing to a weak opponent drags it down more than losing to a strong one. The scores are all connected, your rating depends on your opponents’ ratings, which depend on their opponents’ ratings, and so on across the whole network of matches so the model can compare two players sensibly even if they’ve never played each other.</p>
+<p>Once fitted, the scores both rank the players and give a concrete win probability for any hypothetical matchup.</p>
+</section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>The tuned model reached roughly 64.5% out-of-sample accuracy on unseen matches. More detail on the methodology, the estimation approach, and the evaluation is on the <a href="model.qmd">Model page</a>.</p>
+<p>Model performance was assessed through k-fold cross-validation with k = 10, which produced a predictive accuracy of 63.57% and a log loss of 0.627 reasonable results for a model based solely on match outcomes. <a href="model.qmd">Model page</a>.</p>
 
 
 </section>
