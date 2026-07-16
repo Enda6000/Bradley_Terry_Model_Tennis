@@ -81,6 +81,6 @@
     "href": "index.html#results",
     "title": "Predicting Tennis Match Outcomes Using The Bradley-Terry Model",
     "section": "Results",
-    "text": "Results\nModel performance was assessed through k-fold cross-validation with k = 10, which produced a predictive accuracy of 63.57% and a log loss of 0.627 reasonable results for a model based solely on match outcomes. Model page."
+    "text": "Results\nModel performance was assessed through k-fold cross-validation with k = 10, which produced a predictive accuracy of 63.57% and a log loss of 0.627, reasonable results for a model based solely on match outcomes. Log loss is how we measured model performance, the rational for log loss as a metric of performance is outlined in the report.\nThe predictive accuracy on the first half of the 2026 season of our model was 62.76%. Comparing this value to using the ATP rankings as a method of prediction we get a predictive accuracy of 63.52%. The predictive accuracy doesn’t capture the full strength of this model alone since this value is still reasonable considering the model does not include any extra covariates, such as surface or recent form. We can be happy with these results.\nMany thanks to Dr Jason Wyse for his guidance throughout the project, and to Prof Nikhil Savale for organising the research internship."
   }
 ]
