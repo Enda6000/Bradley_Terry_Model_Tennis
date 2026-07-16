@@ -18,7 +18,7 @@
     "href": "interactive_plots_BT.html#standard-error-of-averaged-player-estimates",
     "title": "Interactive Plots & Graphs",
     "section": "Standard Error of averaged player estimates",
-    "text": "Standard Error of averaged player estimates\nThis is essentially says how much does a players’ performance vary, how consistent of a performer are they? This interpretation is sensible for players with more than 5 games played and tells you who the steady performers are, we can see a strong correlation between the number of games played and the standard error of the a players’ ability/strength score. However, for players with stronger shrinkage there is a caveat. Their ability/strength scores will vary less because of how the model is designed with a harsher shrinkage parameter"
+    "text": "Standard Error of averaged player estimates\nThis is essentially says how much does a players’ performance vary, how consistent of a performer are they? This interpretation is sensible for players with more than 5 games played and tells you who the steady performers are, we can see a strong correlation between the number of games played and the standard error of the a players’ ability/strength score.We can see the top player have the most games played and the lowest standard errors amongst those who have played more than 5 games.\nHowever, for players with stronger shrinkage there is a caveat. Their ability/strength scores will vary less because of how the model is designed with a harsher shrinkage parameter. As a result their standard error is less indicative of the consistency of their performance and more of a consequence of the model."
   },
   {
     "objectID": "interactive_plots_BT.html#networkcomparison-graph-as-motivation-for-maximum-a-posteriori-estimation",
@@ -28,11 +28,11 @@
     "text": "Network/Comparison Graph as motivation for Maximum A Posteriori Estimation\nWhy is this network graph of interest? The comparison graph with players as nodes and a directed edge from each match winner to the loser helps determine whether maximum likelihood estimation is even well-defined. If the comparison graph is not strongly connected, meaning every player is linked to every other by a directed path of wins, we risk our estimates diverging when performing MLE. Our graph does not satisfy this condition, so some ability estimates would diverge under pure MLE. This motivated our use of Maximum A Posteriori estimation, whose prior acts as a regulariser and guarantees finite, unique estimates regardless of the graph’s connectivity."
   },
   {
-    "objectID": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
-    "href": "interactive_plots_BT.html#optimisation-curve-illustrating-flatness-around-minimum",
+    "objectID": "interactive_plots_BT.html#log-loss-values-as-a-function-of-hyperparameters",
+    "href": "interactive_plots_BT.html#log-loss-values-as-a-function-of-hyperparameters",
     "title": "Interactive Plots & Graphs",
-    "section": "Optimisation Curve Illustrating flatness around minimum",
-    "text": "Optimisation Curve Illustrating flatness around minimum\nThe graph here shows that the curve is flat around the minimum which means if we change our shift the value of our hyperparameters the log loss we are trying to minimise does not change in a significant way. The reason for not choosing the absolute minimum but taking a point nearby is explained in more depth in section 3.3 of the full report."
+    "section": "Log loss values as a function of hyperparameters",
+    "text": "Log loss values as a function of hyperparameters\nThe graph here shows that the curve is flat around the minimum which means if we change our shift the value of our hyperparameters the log loss we are trying to minimise does not change in a significant way. The reason for not choosing the absolute minimum but taking a point nearby is explained in more depth in section 3.3 of the full report."
   },
   {
     "objectID": "cv_quart.html",
@@ -67,14 +67,14 @@
     "href": "anims_and_plots.html#centipede-plot-for-player-abilities-averaging-over-fold-estimates",
     "title": "Animations and Plots",
     "section": "Centipede plot for player abilities & averaging over fold estimates",
-    "text": "Centipede plot for player abilities & averaging over fold estimates\n\n\n\n\n\n\nEach row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of \\(beta_i\\) and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his nearby rival Alexander Zverez."
+    "text": "Centipede plot for player abilities & averaging over fold estimates\n\n\n\n\n\n\nEach row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of \\(beta_i\\) and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his nearby rival Alexander Zverev."
   },
   {
     "objectID": "index.html#what-is-a-bradley-terry-model",
     "href": "index.html#what-is-a-bradley-terry-model",
     "title": "Predicting Tennis Match Outcomes Using The Bradley-Terry Model",
     "section": "What is a Bradley-Terry Model?",
-    "text": "What is a Bradley-Terry Model?\nThe Bradley-Terry model is a way of turning head-to-head results comprised of either a win or a loss into a single strength score for each competitor. Every player has some underlying ability, and when two players meet, the probability of each winning depends on the gap between their abilities. A big gap means the stronger player almost always wins; a tiny gap means the match is close to a coin flip.\nThe model works backwards from head-to-head results to abilities/strength scores. Beating a strong opponent nudges your score up more than beating a weak one, and losing to a weak opponent drags it down more than losing to a strong one. The scores are all connected, your rating depends on your opponents’ ratings, which depend on their opponents’ ratings, and so on across the whole network of matches so the model can compare two players sensibly even if they’ve never played each other.\nOnce fitted, the scores both rank the players and give a concrete win probability for any hypothetical matchup."
+    "text": "What is a Bradley-Terry Model?\nThe Bradley-Terry model is a way of turning head-to-head results comprised of either a win or a loss into a single strength score for each competitor. Every player has some underlying ability, and when two players meet, the probability of each winning depends on the gap between their abilities. A big gap means the stronger player almost always wins, a tiny gap means the match is close to a coin flip.\nThe model works backwards from head-to-head results to abilities/strength scores. Beating a strong opponent nudges your score up more than beating a weak one, and losing to a weak opponent drags it down more than losing to a strong one. The scores are all connected, your rating depends on your opponents’ ratings, which depend on their opponents’ ratings, and so on across the whole network of matches so the model can compare two players sensibly even if they’ve never played each other.\nOnce fitted, the scores both rank the players and give a concrete win probability for any hypothetical matchup. The rigorous definition of a Bradley-Terry model is outlined in the full report here."
   },
   {
     "objectID": "index.html#results",
