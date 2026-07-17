@@ -161,8 +161,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#predicted-probabilities-of-actual-winners" id="toc-predicted-probabilities-of-actual-winners" class="nav-link active" data-scroll-target="#predicted-probabilities-of-actual-winners">Predicted probabilities of actual winners</a></li>
-  <li><a href="#centipede-plot-player-rankings-with-uncertainty" id="toc-centipede-plot-player-rankings-with-uncertainty" class="nav-link" data-scroll-target="#centipede-plot-player-rankings-with-uncertainty">Centipede plot: Player rankings with uncertainty</a></li>
+  <li><a href="#centipede-plot-player-rankings-with-uncertainty-estimates" id="toc-centipede-plot-player-rankings-with-uncertainty-estimates" class="nav-link" data-scroll-target="#centipede-plot-player-rankings-with-uncertainty-estimates">Centipede plot: Player Rankings with Uncertainty Estimates</a></li>
   <li><a href="#models-shrinkage-visualised-via-optim-convergence" id="toc-models-shrinkage-visualised-via-optim-convergence" class="nav-link" data-scroll-target="#models-shrinkage-visualised-via-optim-convergence">Models shrinkage visualised via optim() convergence</a></li>
+  <li><a href="#how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" id="toc-how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" class="nav-link" data-scroll-target="#how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings">How do ATP rankings compare to our Bradley-Terry model rankings?</a></li>
   </ul>
 </nav>
     </div>
@@ -196,7 +197,8 @@ window.Quarto = {
 <p><img src="fold_probs.gif" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>When we pick a training set and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. We can see the plot is most active around the centre whilst being more dense to right of the centre. This is what we would expect and hope for.</p>
+<p>When we pick a training set and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction?</p>
+<p>We can see the plot is most active around the centre whilst being noticeably more dense to right of the centre. This is what we would expect and hope for, it illustrates that our model is better than randomly guessing the winner.</p>
 <p><br><br></p>
 <ul>
 <li><span class="math inline">\(p_{ij}\)</span> — probability that player <span class="math inline">\(i\)</span> beats player <span class="math inline">\(j\)</span></li>
@@ -215,15 +217,15 @@ p_{ij} &amp; \text{if player } i \text{ won} \\
 </div>
 </div>
 </section>
-<section id="centipede-plot-player-rankings-with-uncertainty" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="centipede-plot-player-rankings-with-uncertainty">Centipede plot: Player rankings with uncertainty</h2>
+<section id="centipede-plot-player-rankings-with-uncertainty-estimates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="centipede-plot-player-rankings-with-uncertainty-estimates">Centipede plot: Player Rankings with Uncertainty Estimates</h2>
 <div class="column-page quarto-layout-panel" data-layout="[60,40]">
 <div class="quarto-layout-row quarto-layout-valign-center">
 <div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
 <p><img src="cent_plot_2.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>Each row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of <span class="math inline">\(\beta_i\)</span> and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his neighbour Alexander Zverev. Valentin Vacherot large interval is also point of interest since we need to determine if this is a true reflection of his performance or as result of an issue with the data or model.</p>
+<p>Each row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of <span class="math inline">\(\beta_i\)</span> and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his neighbour Alexander Zverev. Valentin Vacherot’s large interval is also of interest since we need to determine if this is a true reflection of his varying performance or as result of an issue with the data or model.</p>
 </div>
 </div>
 </div>
@@ -241,6 +243,12 @@ p_{ij} &amp; \text{if player } i \text{ won} \\
 </div>
 </div>
 </div>
+</section>
+<section id="how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings">How do ATP rankings compare to our Bradley-Terry model rankings?</h2>
+<p>This plot compares the rankings implied by the Bradley–Terry abilities against the official ATP rankings for all players appearing in both lists. The ATP ranks players by summing the points of each player from their best nineteen tournament results over the most recent 52 week period. A higher amount of points are rewarded for winning matches in Grand Slam competitions and the ATP finals than some of the less prestigious ATP competitions.</p>
+<p>In the plot, each point is a player, positioned by their ATP rank and their model rank, with the dashed diagonal indicating equal ranking. Agreement between the two rankings is strongest among the top players and deteriorates steadily down the list, producing a fan shape. Points cluster closer the diagonal in the top 50 but spread increasingly wide in the tail as we get to lower ranked players. Disagreement grows further down the rankings, where players contest fewer tour-level matches and both systems have less information to distinguish them.</p>
+<p><img src="ranking_comparison.png" class="img-fluid"></p>
 
 
 </section>
