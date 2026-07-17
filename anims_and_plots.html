@@ -122,7 +122,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./interactive_plots_BT.html"> 
-<span class="menu-text">Interactive Plots</span></a>
+<span class="menu-text">Interactive Plots &amp; Graphs</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./anims_and_plots.html" aria-current="page"> 
@@ -160,8 +160,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#density-of-the-probability-that-the-actual-winner-won" id="toc-density-of-the-probability-that-the-actual-winner-won" class="nav-link active" data-scroll-target="#density-of-the-probability-that-the-actual-winner-won">Density of the probability that the actual winner won</a></li>
-  <li><a href="#centipede-plot-for-player-abilities-averaging-over-fold-estimates" id="toc-centipede-plot-for-player-abilities-averaging-over-fold-estimates" class="nav-link" data-scroll-target="#centipede-plot-for-player-abilities-averaging-over-fold-estimates">Centipede plot for player abilities &amp; averaging over fold estimates</a></li>
+  <li><a href="#predicted-probabilities-of-actual-winners" id="toc-predicted-probabilities-of-actual-winners" class="nav-link active" data-scroll-target="#predicted-probabilities-of-actual-winners">Predicted probabilities of actual winners</a></li>
+  <li><a href="#centipede-plot-player-rankings-with-uncertainty" id="toc-centipede-plot-player-rankings-with-uncertainty" class="nav-link" data-scroll-target="#centipede-plot-player-rankings-with-uncertainty">Centipede plot: Player rankings with uncertainty</a></li>
+  <li><a href="#models-shrinkage-visualised-via-optim-convergence" id="toc-models-shrinkage-visualised-via-optim-convergence" class="nav-link" data-scroll-target="#models-shrinkage-visualised-via-optim-convergence">Models shrinkage visualised via optim() convergence</a></li>
   </ul>
 </nav>
     </div>
@@ -187,20 +188,15 @@ window.Quarto = {
 </header>
 
 
-<section id="density-of-the-probability-that-the-actual-winner-won" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="density-of-the-probability-that-the-actual-winner-won">Density of the probability that the actual winner won</h2>
-<div class="quarto-layout-panel page-columns page-full" data-layout="[60,40]">
-<div class="quarto-layout-row quarto-layout-valign-center page-full">
-<div class="quarto-layout-cell page-columns page-full" style="flex-basis: 60.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="fold_probs.gif" class="img-fluid figure-img column-page" style="width:100.0%"></p>
-<figcaption>Density of the probability that the actual winner won</figcaption>
-</figure>
-</div>
+<section id="predicted-probabilities-of-actual-winners" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="predicted-probabilities-of-actual-winners">Predicted probabilities of actual winners</h2>
+<div class="column-page quarto-layout-panel" data-layout="[60,40]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="fold_probs.gif" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>When we pick a training and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. We can see the plot is most active around the 45%-70% range which is what we would hope for.</p>
+<p>When we pick a training set and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. We can see the plot is most active around the centre whilst being more dense to right of the centre. This is what we would expect and hope for.</p>
 <p><br><br></p>
 <ul>
 <li><span class="math inline">\(p_{ij}\)</span> — probability that player <span class="math inline">\(i\)</span> beats player <span class="math inline">\(j\)</span></li>
@@ -219,19 +215,32 @@ p_{ij} &amp; \text{if player } i \text{ won} \\
 </div>
 </div>
 </section>
-<section id="centipede-plot-for-player-abilities-averaging-over-fold-estimates" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="centipede-plot-for-player-abilities-averaging-over-fold-estimates">Centipede plot for player abilities &amp; averaging over fold estimates</h2>
+<section id="centipede-plot-player-rankings-with-uncertainty" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="centipede-plot-player-rankings-with-uncertainty">Centipede plot: Player rankings with uncertainty</h2>
 <div class="column-page quarto-layout-panel" data-layout="[60,40]">
 <div class="quarto-layout-row quarto-layout-valign-center">
 <div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
 <p><img src="cent_plot_2.png" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>Each row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of <span class="math inline">\(beta_i\)</span> and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his nearby rival Alexander Zverev.</p>
+<p>Each row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of <span class="math inline">\(\beta_i\)</span> and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. We can see Jannik Sinner and Carlos Alcaraz are substantially better than even Novak Djokovic who himself is noticeably better than his neighbour Alexander Zverev. Valentin Vacherot large interval is also point of interest since we need to determine if this is a true reflection of his performance or as result of an issue with the data or model.</p>
 </div>
 </div>
 </div>
 <p><br><br></p>
+</section>
+<section id="models-shrinkage-visualised-via-optim-convergence" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="models-shrinkage-visualised-via-optim-convergence">Models shrinkage visualised via optim() convergence</h2>
+<div class="column-page quarto-layout-panel" data-layout="[40,60]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>This animation visualises the optimisation process that produces the model’s final ability estimates. Each point represents one of the 584 ATP players, positioned by their ability score at the current stage of the optimisation (vertical axis) against their final converged estimate (horizontal axis). As optim()‘s BFGS method iterates on the negative log-posterior, we can see the points move around until settling on the 45° diagonal, at which point the current and final estimates coincide and the optimiser has converged. The players’ points are coloured by the number of matches each have played, this is a nice visualisation of the regularisation at work. Players with large match counts travel furthest from the origin, as the data dominates the prior, while sparsely observed players remain shrunk towards zero throughout. Most of the movement occurs within the first few iterations, with the remainder of the animation showing progressively finer refinements.</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="optim_anim_3.gif" class="img-fluid"></p>
+</div>
+</div>
+</div>
 
 
 </section>
