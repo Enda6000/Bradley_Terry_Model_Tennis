@@ -133,7 +133,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#a-bradley-terry-model-with-regularised-map-estimation" id="toc-a-bradley-terry-model-with-regularised-map-estimation" class="nav-link active" data-scroll-target="#a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</a></li>
   <li><a href="#what-is-a-bradley-terry-model" id="toc-what-is-a-bradley-terry-model" class="nav-link" data-scroll-target="#what-is-a-bradley-terry-model">What is a Bradley-Terry Model?</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#why-use-a-bradley-terry-model-for-tennis" id="toc-why-use-a-bradley-terry-model-for-tennis" class="nav-link" data-scroll-target="#why-use-a-bradley-terry-model-for-tennis">Why use a Bradley-Terry Model for tennis?</a></li>
+  <li><a href="#brief-results-summary-of-the-model" id="toc-brief-results-summary-of-the-model" class="nav-link" data-scroll-target="#brief-results-summary-of-the-model">Brief Results Summary of the Model</a></li>
   </ul>
 </nav>
     </div>
@@ -172,10 +173,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The model works backwards from head-to-head results to abilities/strength scores. Beating a strong opponent nudges your score up more than beating a weak one, and losing to a weak opponent drags it down more than losing to a strong one. The scores are all connected, your rating depends on your opponents’ ratings, which depend on their opponents’ ratings, and so on across the whole network of matches so the model can compare two players sensibly even if they’ve never played each other.</p>
 <p>Once fitted, the scores both rank the players and give a concrete win probability for any hypothetical matchup. The rigorous definition of a Bradley-Terry model is outlined in the full report here.</p>
 </section>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Model performance was assessed through k-fold cross-validation with k = 10, which produced a predictive accuracy of 63.57% and a log loss of 0.627, reasonable results for a model based solely on match outcomes. Log loss is how we measured model performance, the rational for log loss as a metric of performance is outlined in the report.</p>
-<p>The predictive accuracy on the first half of the 2026 season of our model was 62.76%. Comparing this value to using the ATP rankings as a method of prediction we get a predictive accuracy of 63.52%. The predictive accuracy doesn’t capture the full strength of this model alone since this value is still reasonable considering the model does not include any extra covariates, such as surface or recent form. We can be happy with these results.</p>
+<section id="why-use-a-bradley-terry-model-for-tennis" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-a-bradley-terry-model-for-tennis">Why use a Bradley-Terry Model for tennis?</h2>
+<p>Tennis results can be predicted effectively using a Bradley Terry model as many players play a high volume of games each season, and the only potential outcomes for each player are win or loss. In addition, the model naturally reflects the significance of each result, an upset will harshly punish the high-rated and strongly reward the low-rated player. Likewise, an unsurprising result where a high-rated player beats a low-rated player will offer minor adjustments in players’ ratings. This made the model a natural tool for both assessing player strength and forecasting future matches.</p>
+</section>
+<section id="brief-results-summary-of-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="brief-results-summary-of-the-model">Brief Results Summary of the Model</h2>
+<p>Model parameters were estimated by MAP on ATP match data from the 2024 and 2025 seasons. Model performance was assessed through k-fold cross-validation with k = 10, which produced accuracy of 63.55% and a log loss of 0.627, reasonable results for a model based solely on match outcomes. Log loss is how we measured model performance, the rational for log loss as a metric of performance is outlined in the report.</p>
+<p>Predictive performance was then assessed on matches from the first half of the 2026 season (02/01/26 to 21/06/26), which were held out entirely from fitting and tuning. The predictive accuracy of our model here was 62.76%. Comparing this value to using the ATP rankings as a method of prediction we get a predictive accuracy of 63.52%. The predictive accuracy doesn’t capture the full strength of this model alone since this value is still reasonable considering the model does not include any extra covariates, such as surface or recent form. We can be happy with these results.</p>
 <p>Many thanks to Dr Jason Wyse for his guidance throughout the project, and to Prof Nikhil Savale for organising the research internship.</p>
 
 
