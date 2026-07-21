@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -93,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./interactive_plots_BT.html"> 
-<span class="menu-text">Interactive Plots</span></a>
+<span class="menu-text">Interactive Plots &amp; Graphs</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./anims_and_plots.html" aria-current="page"> 
@@ -110,6 +139,11 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/enda-byard-shaughnessy"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -121,11 +155,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#predicted-probabilities-of-actual-winners" id="toc-predicted-probabilities-of-actual-winners" class="nav-link active" data-scroll-target="#predicted-probabilities-of-actual-winners">Predicted probabilities of actual winners</a></li>
+  <li><a href="#centipede-plot-player-rankings-with-uncertainty-estimates" id="toc-centipede-plot-player-rankings-with-uncertainty-estimates" class="nav-link" data-scroll-target="#centipede-plot-player-rankings-with-uncertainty-estimates">Centipede plot: Player Rankings with Uncertainty Estimates</a></li>
+  <li><a href="#model-shrinkage-visualised-via-optim-convergence" id="toc-model-shrinkage-visualised-via-optim-convergence" class="nav-link" data-scroll-target="#model-shrinkage-visualised-via-optim-convergence">Model shrinkage visualised via optim() convergence</a></li>
+  <li><a href="#how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" id="toc-how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" class="nav-link" data-scroll-target="#how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings">How do ATP rankings compare to our Bradley-Terry model rankings?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -146,9 +189,69 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="fold_probs.gif" id="fig-bump" class="img-fluid" style="width:70.0%" alt="Density of the probability that the actual winner won"> <img src="fold_settle.gif" id="fig-bump" class="img-fluid" style="width:70.0%" alt="Averaged ability versus per fold estimate"></p>
+<section id="predicted-probabilities-of-actual-winners" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="predicted-probabilities-of-actual-winners">Predicted probabilities of actual winners</h2>
+<div class="column-page quarto-layout-panel" data-layout="[60,40]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="fold_probs.gif" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>When we pick a training set and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction?</p>
+<p>We can see the plot is most active around the centre whilst being noticeably more dense to right of the centre. This is what we would expect and hope for, it illustrates that our model outperforms a naive baseline that assigns every player a 50% chance of winning.</p>
+<p><br><br></p>
+<ul>
+<li><span class="math inline">\(p_{ij}\)</span> — probability that player <span class="math inline">\(i\)</span> beats player <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\beta_i\)</span> — ability/strength score of player <span class="math inline">\(i\)</span>, estimated by the model <span class="math display">\[
+p_{ij} = \frac{e^{\beta_i}}{e^{\beta_i} + e^{\beta_j}}
+\]</span></li>
+</ul>
+<p><span class="math display">\[
+P(\text{actual winner won}) =
+\begin{cases}
+p_{ij} &amp; \text{if player } i \text{ won} \\
+1 - p_{ij} &amp; \text{if player } j \text{ won}
+\end{cases}
+\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="centipede-plot-player-rankings-with-uncertainty-estimates" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="centipede-plot-player-rankings-with-uncertainty-estimates">Centipede plot: Player Rankings with Uncertainty Estimates</h2>
+<div class="column-page quarto-layout-panel" data-layout="[60,40]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="cent_plot_2.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>Each row shows one of the top 15 players by estimated ability, with the dot marking the MAP estimate of <span class="math inline">\(\beta_i\)</span> and the coloured line an approximate 95% interval calculated from the standard errors. The key feature is the overlap between neighbouring intervals, where two players’ intervals overlap substantially, the model cannot confidently say one is stronger than the other. Aside from Novak Djokovic, the model is confident Jannik Sinner and Carlos Alcaraz are head and shoulders above their competition. Valentin Vacherot’s large interval is also of interest since we would like to determine what is causing such uncertanty in his estimated ability.</p>
+</div>
+</div>
+</div>
+<p><br><br></p>
+</section>
+<section id="model-shrinkage-visualised-via-optim-convergence" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="model-shrinkage-visualised-via-optim-convergence">Model shrinkage visualised via optim() convergence</h2>
+<div class="column-page quarto-layout-panel" data-layout="[40,60]">
+<div class="quarto-layout-row quarto-layout-valign-center">
+<div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>This animation visualises the optimisation process that produces the model’s final ability estimates. Each point represents one of the 584 ATP players, positioned by their ability score at the current stage of the optimisation (vertical axis) against their final converged estimate (horizontal axis). As optim()‘s BFGS method iterates on the negative log-posterior, we can see the points move around until settling on the 45° diagonal, at which point the current and final estimates coincide and the optimiser has converged. The players’ points are coloured by the number of matches each have played, this is a nice visualisation of the regularisation at work, we can see many points clustering around zero. Players with large match counts travel furthest from the origin, as the data dominates the prior, while sparsely observed players remain shrunk towards zero throughout. Most of the movement occurs within the first few iterations, with the remainder of the animation showing progressively finer refinements.</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: center;">
+<p><img src="optim_anim_3.gif" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-atp-rankings-compare-to-our-bradley-terry-model-rankings">How do ATP rankings compare to our Bradley-Terry model rankings?</h2>
+<p>This plot compares the rankings implied by the Bradley–Terry abilities against the official ATP rankings for all players appearing in both lists. The ATP ranks players by summing the points of each player from their best nineteen tournament results over the most recent 52 week period. A higher amount of points are rewarded for winning matches in Grand Slam competitions and the ATP finals than some of the less prestigious ATP competitions.</p>
+<p>In the plot, each point is a player, positioned by their ATP rank and their model rank, with the dashed diagonal indicating equal ranking. Agreement between the two rankings is strongest among the top players and deteriorates steadily down the list. Points cluster closer to the diagonal in the top 50 but spread increasingly wide in the tail as we get to lower ranked players. Disagreement grows further down the rankings, where players contest fewer tour-level matches and both systems have less information to distinguish them.</p>
+<p><img src="ranking_comparison.png" class="img-fluid"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -224,7 +327,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/portfolio1\/");
+        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/Bradley_Terry_Model_Tennis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -558,7 +661,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Enda Byard Shaughnessy &amp; James Brennan</p>
+<p>Hamilton Trust Research Internship 2026, Trinity College Dublin</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

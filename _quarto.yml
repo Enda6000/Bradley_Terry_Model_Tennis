@@ -9,7 +9,7 @@ website:
       - href: index.qmd
         text: Predicting Tennis Match Outcomes Using The Bradley Terry Model
       - href: interactive_plots_BT.qmd
-        text: Interactive Plots
+        text: Interactive Plots & Graphs
       - href: anims_and_plots.qmd
         text: Animations & Static Plots
       - href: bt_report_1.pdf
@@ -17,12 +17,22 @@ website:
     right:
       - icon: github
         href: https://github.com/Enda6000
-  page-footer: "Enda Byard Shaughnessy & James Brennan"
+      - icon: linkedin
+        href: https://www.linkedin.com/in/enda-byard-shaughnessy
+  page-footer: "Hamilton Trust Research Internship 2026, Trinity College Dublin"
 
 format:
   html:
     theme: flatly
     css: styles.css
     toc: true
+    
+#to update github files use 
+#git add .
+#git commit -m "update files"
+#git push
+
+#to update webpage
+#quarto publish gh-pages
 
 

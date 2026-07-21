@@ -1,9 +1,27 @@
 ---
-title: "Under Maintenance..."
+title: "Interactive Plots & Graphs"
 ---
-## Standard Error of averaged player estimates
 
-This is essentially says how much does a players' performance vary, how consistent of a performer are they?
+## Head-to-head probabilities
+This heat map shows the probability of the player listed on the left beating the player listed at the bottom, as calculated using our model's player ability estimates. You can hover your cursor over any given square to see the exact probability who beating who. 
+
+
+```{r}
+#| fig-height: 12
+#| fig-width : 12
+#| echo: false
+#| warning: false
+#| message: false
+library(plotly)
+readRDS("h2h_estimates.rds")
+```
+
+## Averaged standard error of player estimates
+
+The standard error of a player's estimated ability reflects how precisely the model has determined it, and the plot shows the expected pattern. Standard errors decline steadily with matches played, as we get to the players with the fullest schedules, including those at the top of the rankings we have the most precisely estimated abilities. For players with few matches, however, the standard error is dominated by the prior rather than the data. Shrinkage bounds their standard errors at a level set by the prior, so a small standard error for a sparsely observed player indicates regularization at work, not strong evidence about their ability. The plot thus separates players whose ratings we can trust on the strength of the data from those whose ratings are largely a modeling assumption.
+
+
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -13,14 +31,28 @@ library(ggplot2)
 readRDS("se_plot.rds")
 ```
 
-## Optimisation Curve Illustrating flatness around minimum
-
-The reason for not choosing the absolute minimum but taking a point nearby is explained in
-more depth in section 3.3 of the full report. The plot here shows that the curve is flat around the minimum which means if we change our choice of hyperparameters the log loss we are trying to minimise does not change in a significant way.
+## Network/Comparison Graph as motivation for Maximum A Posteriori Estimation
+Why is this network/comparison graph of interest? The comparison graph has players as nodes and an edge (undirected in our case) from each match winner to the loser This helps determine whether maximum likelihood estimation is even well-defined. If the comparison graph is not strongly connected, meaning every player is linked to every other by a path,  we risk our estimates diverging when performing MLE. Looking at the outskirts of our graph, it does not satisfy this condition, so some ability estimates would diverge under pure MLE. This motivated our use of Maximum A Posteriori estimation, whose prior acts as a regulariser and guarantees finite estimates regardless of the graph's connectivity.
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
 library(plotly)
-readRDS("bt_surface.rds")
+readRDS("bt_network_1.rds")
 ```
+
+## Log loss values as a function of hyperparameters
+
+The plane defined by the x-axis and y-axis is precisely our 2D grid of $\lambda$ pairs. The z-axis is the corresponding log loss value for a given pair. So this graph is the resulting log loss values as a function of our hyperparameters. Since we want a log loss which is as small as possible this surface is very telling for what values we should choose for our  hyperparameters. 
+
+The graph here shows that the surface becomes a valley-like shape, using the process outlined in section 3.3 of the report we get the absolute minimum: $(\lambda_{strong},\lambda_{weak}) = (4.9,0.96)$ and the optimal pair: $(\lambda_{strong},\lambda_{weak}) = (2.7,0.96)$. The graph here shows that we can shift our $\lambda_{strong}$ value and remain in this valley where our log loss remains sufficiently minimised. As $\lambda_{strong}$  goes beyond the value of 5 this valley shape will be perpetuated.
+
+The reason for not choosing the absolute minimum but taking a point nearby in this valley is explained in more depth in section 3.3 of the [full report](bt_report_1).
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(plotly)
+readRDS("optim_surface.rds")
+```
+

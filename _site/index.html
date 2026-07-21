@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>Predicting Tennis Match Outcomes Using The Bradley-Terry Model</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./interactive_plots_BT.html"> 
-<span class="menu-text">Interactive Plots</span></a>
+<span class="menu-text">Interactive Plots &amp; Graphs</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./anims_and_plots.html"> 
@@ -110,6 +110,11 @@ ul.task-list li input[type="checkbox"] {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/enda-byard-shaughnessy"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -118,28 +123,65 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-bradley-terry-model-with-regularised-map-estimation" id="toc-a-bradley-terry-model-with-regularised-map-estimation" class="nav-link active" data-scroll-target="#a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</a></li>
+  <li><a href="#what-is-a-bradley-terry-model" id="toc-what-is-a-bradley-terry-model" class="nav-link" data-scroll-target="#what-is-a-bradley-terry-model">What is a Bradley-Terry Model?</a></li>
+  <li><a href="#why-use-a-bradley-terry-model-for-tennis" id="toc-why-use-a-bradley-terry-model-for-tennis" class="nav-link" data-scroll-target="#why-use-a-bradley-terry-model-for-tennis">Why use a Bradley-Terry Model for tennis?</a></li>
+  <li><a href="#brief-results-summary-of-the-model" id="toc-brief-results-summary-of-the-model" class="nav-link" data-scroll-target="#brief-results-summary-of-the-model">Brief Results Summary of the Model</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Predicting Tennis Match Outcomes Using The Bradley-Terry Model</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="predicting-atp-tennis-matches" class="level1 hero">
-<h1>Predicting ATP Tennis Matches</h1>
-<section id="a-bradley-terry-model-with-regularised-map-estimation" class="level3">
-<h3 class="anchored" data-anchor-id="a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</h3>
-</section>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="a-bradley-terry-model-with-regularised-map-estimation" class="level2 hero">
+<h2 class="anchored" data-anchor-id="a-bradley-terry-model-with-regularised-map-estimation">A Bradley-Terry model with regularised MAP estimation</h2>
 </section>
 <div class="lead">
-<p>Can we predict who wins a professional tennis match better than the rankings can? This project builds a Bradley-Terry model on ATP match data, fitting player strengths by maximum a posteriori estimation and tuning the priors by cross-validated grid search.</p>
+<p>Can we predict the winner of a professional tennis match better than the official rankings? This project builds a Bradley-Terry model on ATP match data from the 2024 &amp; 2025 seasons, fitting player strengths by Maximum A Posteriori estimation and tuning the prior’s regularisation parameters via a cross-validated 2D grid search.</p>
 </div>
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>The tuned model reached roughly 64.5% out-of-sample accuracy on unseen matches. More detail on the methodology, the estimation approach, and the evaluation is on the <a href="model.qmd">Model page</a>.</p>
+<p><img src="mixed_players_image.jpg" class="img-fluid"></p>
+<section id="what-is-a-bradley-terry-model" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-bradley-terry-model">What is a Bradley-Terry Model?</h2>
+<p>The Bradley-Terry model is a way of turning a set of head-to-head results into a single strength score for each competitor. Every player has some underlying ability, and when two players meet, the probability of each winning depends on the gap between their abilities. A big gap means the stronger player almost always wins, a tiny gap means the match is close to a coin flip.</p>
+<p>The model works backwards from head-to-head results to abilities/strength scores. Beating a strong opponent nudges your score up more than beating a weak one, and losing to a weak opponent drags it down more than losing to a strong one. The scores are all connected, your rating depends on your opponents’ ratings, which depend on their opponents’ ratings, and so on across the whole network of matches so the model can compare two players sensibly even if they’ve never played each other.</p>
+<p>Once fitted, the scores both rank the players and give a concrete win probability for any hypothetical matchup. The rigorous definition of a Bradley-Terry model is outlined in the full report here.</p>
+</section>
+<section id="why-use-a-bradley-terry-model-for-tennis" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-a-bradley-terry-model-for-tennis">Why use a Bradley-Terry Model for tennis?</h2>
+<p>Tennis results can be predicted effectively using a Bradley Terry model as many players play a high volume of games each season, and the only potential outcomes for each player are win or loss. In addition, the model naturally reflects the significance of each result, an upset will harshly punish the high-rated and strongly reward the low-rated player. Likewise, an unsurprising result where a high-rated player beats a low-rated player will offer minor adjustments in players’ ratings. This made the model a natural tool for both assessing player strength and forecasting future matches.</p>
+</section>
+<section id="brief-results-summary-of-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="brief-results-summary-of-the-model">Brief Results Summary of the Model</h2>
+<p>Model parameters were estimated by MAP on ATP match data from the 2024 and 2025 seasons. Model performance was assessed through k-fold cross-validation with k = 10, which produced accuracy of 63.55% and a log loss of 0.627, reasonable results for a model based solely on match outcomes. Log loss is how we measured model performance, the rational for log loss as a metric of performance is outlined in the report.</p>
+<p>Predictive performance was then assessed on matches from the first half of the 2026 season (02/01/26 to 21/06/26), which were held out entirely from fitting and tuning. The predictive accuracy of our model here was 62.76%. Comparing this value to using the ATP rankings as a method of prediction we get a predictive accuracy of 63.52%. The predictive accuracy doesn’t capture the full strength of this model alone since this value is still reasonable considering the model does not include any extra covariates, such as surface or recent form. We can be happy with these results.</p>
+<p>Many thanks to Dr Jason Wyse for his guidance throughout the project, and to Prof Nikhil Savale for organising the research internship.</p>
 
 
 </section>
@@ -218,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/portfolio1\/");
+        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/Bradley_Terry_Model_Tennis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -552,7 +594,7 @@ ul.task-list li input[type="checkbox"] {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Enda Byard Shaughnessy &amp; James Brennan</p>
+<p>Hamilton Trust Research Internship 2026, Trinity College Dublin</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
