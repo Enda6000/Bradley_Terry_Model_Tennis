@@ -135,7 +135,7 @@ window.Quarto = {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Enda6000"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/enda-byard-shaughnessy"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -197,8 +197,7 @@ window.Quarto = {
 <p><img src="fold_probs.gif" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>As part of k-fold cross validation we pick a different training set and test set at each fold. We check to see what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction?</p>
-<p>We can see the plot is most active around the centre whilst being noticeably more dense to right of the centre. This is what we would expect and hope for, it illustrates that our model outperforms a naive baseline that assigns every player a 50% chance of winning.</p>
+<p>As part of k-fold cross validation we pick a different training set and test set at each fold. We check to see what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction? The plot here indicates what probabilities we assigned to the actual winner.</p>
 <p><br><br></p>
 <ul>
 <li><span class="math inline">\(p_{ij}\)</span> — probability that player <span class="math inline">\(i\)</span> beats player <span class="math inline">\(j\)</span></li>
@@ -327,7 +326,7 @@ p_{ij} &amp; \text{if player } i \text{ won} \\
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/Enda6000\.github\.io\/Bradley_Terry_Model_Tennis\/");
+        var filterRegex = new RegExp("https:\/\/enda-byard-shaughnessy\.github\.io\/Bradley_Terry_Model_Tennis\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
