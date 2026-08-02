@@ -16,14 +16,15 @@ website:
         text: Full Report
     right:
       - icon: github
-        href: https://github.com/Enda6000
+        href: https://github.com/enda-byard-shaughnessy
       - icon: linkedin
         href: https://www.linkedin.com/in/enda-byard-shaughnessy
   page-footer: "Hamilton Trust Research Internship 2026, Trinity College Dublin"
+      
 
 format:
   html:
-    theme: flatly
+    theme: pulse
     css: styles.css
     toc: true
     
@@ -34,5 +35,7 @@ format:
 
 #to update webpage
 #quarto publish gh-pages
+
+
 
 

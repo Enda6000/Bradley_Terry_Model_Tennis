@@ -6,15 +6,26 @@ title: "Interactive Plots & Graphs"
 This heat map shows the probability of the player listed on the left beating the player listed at the bottom, as calculated using our model's player ability estimates. You can hover your cursor over any given square to see the exact probability who beating who. 
 
 
+::: {.d-none .d-md-block}
+
 ```{r}
-#| fig-height: 12
-#| fig-width : 12
 #| echo: false
 #| warning: false
 #| message: false
 library(plotly)
-readRDS("h2h_estimates.rds")
+
+readRDS("h2h_estimates.rds") |>
+  layout(autosize = TRUE) |>
+  config(responsive = TRUE, displayModeBar = FALSE)
 ```
+
+:::
+
+::: {.d-block .d-md-none}
+
+![Head-to-head win probability heatmap (interactive version available on desktop)](h2h_static.png){width=100%}
+
+:::
 
 ## Averaged standard error of player estimates
 
@@ -32,7 +43,7 @@ readRDS("se_plot.rds")
 ```
 
 ## Network/Comparison Graph as motivation for Maximum A Posteriori Estimation
-Why is this network/comparison graph of interest? The comparison graph has players as nodes and an edge (undirected in our case) from each match winner to the loser This helps determine whether maximum likelihood estimation is even well-defined. If the comparison graph is not strongly connected, meaning every player is linked to every other by a path,  we risk our estimates diverging when performing MLE. Looking at the outskirts of our graph, it does not satisfy this condition, so some ability estimates would diverge under pure MLE. This motivated our use of Maximum A Posteriori estimation, whose prior acts as a regulariser and guarantees finite estimates regardless of the graph's connectivity.
+Why is this network/comparison graph of interest? The comparison graph has players as nodes and an edge (undirected in our case) from each match winner to the loser. This helps determine whether maximum likelihood estimation is even well-defined. If the comparison graph is not strongly connected, meaning every player is linked to every other by a path,  we risk our estimates diverging when performing MLE. Looking at the outskirts of our graph, it does not satisfy this condition, so some ability estimates would diverge under pure MLE. This motivated our use of Maximum A Posteriori estimation, whose prior acts as a regulariser and guarantees finite estimates regardless of the graph's connectivity.
 ```{r}
 #| echo: false
 #| warning: false
