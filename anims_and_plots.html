@@ -197,7 +197,7 @@ window.Quarto = {
 <p><img src="fold_probs.gif" class="img-fluid"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<p>When we pick a training set and a test set we check what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction?</p>
+<p>As part of k-fold cross validation we pick a different training set and test set at each fold. We check to see what probability we assigned to the actual winner of each game in the test set. Here we see how well our model assigned probabilities to the winner in each hold-out set. This is the essence of what log loss captures as a performance metric, how confident were we in our prediction?</p>
 <p>We can see the plot is most active around the centre whilst being noticeably more dense to right of the centre. This is what we would expect and hope for, it illustrates that our model outperforms a naive baseline that assigns every player a 50% chance of winning.</p>
 <p><br><br></p>
 <ul>
