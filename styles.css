@@ -1,1 +1,57 @@
 /* css styles */
+.wide-row {
+  width: 90vw;
+  margin-left: calc(50% - 45vw);
+}
+
+.gif-spaced {
+  margin-bottom: 40px;
+}
+
+.shadow-img img {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+}
+
+######################################
+
+/* all figure captions */
+.figure-caption {
+  font-style: italic;
+  color: #666;
+  font-size: 0.85em;
+}
+
+/* body text: size, line spacing, max line length */
+p {
+  line-height: 1.7;
+}
+
+/* headings */
+h2 {
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 6px;
+}
+
+/* code blocks */
+pre {
+  border-left: 3px solid #4a90d9;
+}
+
+/* links */
+a {
+  color: #1a6dbf;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+
+.cell-output-display,
+.quarto-figure {
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 700px;
+}
