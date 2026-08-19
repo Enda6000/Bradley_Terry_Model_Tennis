@@ -36,5 +36,7 @@ a model based solely on match outcomes. Log loss is how we measured model perfor
 
 Predictive performance was then assessed on matches from the first half of the 2026 season (02/01/26 to 21/06/26), which were held out entirely from fitting and tuning. The predictive accuracy of our model here was 62.76%. Comparing this value to using the ATP rankings as a method of prediction we get a predictive accuracy of 63.52%. The predictive accuracy doesn’t capture the full strength of this model alone since this value is still reasonable considering the model does not include any extra covariates, such as surface or recent form. We can be happy with these results.
 
-
 Many thanks to Dr Jason Wyse for his guidance throughout the project, and to Prof Nikhil Savale for organising the research internship.
+
+![James & Enda pictured at the poster presentation day.](Brennan-Shaughnessy-1.jpg)
+

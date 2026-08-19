@@ -1,9 +1,10 @@
 
 project:
   type: website
-
+  resources:
+    - "h2h.html"
 website:
-   
+   site-url: "https://enda-byard-shaughnessy.github.io/Bradley_Terry_Model_Tennis"
   navbar:
     left:
       - href: index.qmd

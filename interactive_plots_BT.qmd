@@ -5,27 +5,23 @@ title: "Interactive Plots & Graphs"
 ## Head-to-head probabilities
 This heat map shows the probability of the player listed on the left beating the player listed at the bottom, as calculated using our model's player ability estimates. You can hover your cursor over any given square to see the exact probability who beating who. 
 
-
-::: {.d-none .d-md-block}
-
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
+#| fig-width: 8
+#| fig-height: 8
 library(plotly)
 
-readRDS("h2h_estimates.rds") |>
-  layout(autosize = TRUE) |>
-  config(responsive = TRUE, displayModeBar = FALSE)
+p <- readRDS("h2h_estimates.rds")
+
+p %>%
+  layout(
+    xaxis = list(tickmode = "linear", dtick = 1, automargin = TRUE),
+    yaxis = list(tickmode = "linear", dtick = 1, automargin = TRUE)
+  )
 ```
 
-:::
-
-::: {.d-block .d-md-none}
-
-![Head-to-head win probability heatmap (interactive version available on desktop)](h2h_static.png){width=100%}
-
-:::
 
 ## Averaged standard error of player estimates
 
